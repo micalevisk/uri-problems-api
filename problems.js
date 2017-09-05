@@ -66,7 +66,7 @@ function ProblemController(){
    */
   this.delete = (req, res, next) => {
     const idToDelete = req.params.id;
-    if (Number(idToDelete)){
+    if (Number.isInteger(idToDelete)){
       const problemDeleted = this.problems_storage[idToDelete];
       if (problemDeleted) {
         delete this.problems_storage[idToDelete];
