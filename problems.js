@@ -1,4 +1,8 @@
-function responseJson(message, right, data = {}) {
+function isNumber(val){
+  return !isNaN(val);
+}
+
+function responseJson(message, right, data = {}){
   return Object.assign({ message, right }, data);
 }
 
@@ -49,7 +53,7 @@ function ProblemController(){
    */
   this.post = (req, res, next) => {
     const bparams = req.body;
-    if (!bparams || !bparams.hasOwnProperty('id') || !bparams.hasOwnProperty('input') || !Number.isInteger(bparams.id)) {
+    if (!bparams || !bparams.hasOwnProperty('id') || !bparams.hasOwnProperty('input') || !isNumber(bparams.id)) {
       res.send(500, responseJson('require "id" and "input" parameters.', false));
     }
     else {
@@ -66,7 +70,7 @@ function ProblemController(){
    */
   this.delete = (req, res, next) => {
     const idToDelete = req.params.id;
-    if (Number.isInteger(idToDelete)){
+    if (isNumber(idToDelete)){
       const problemDeleted = this.problems_storage[idToDelete];
       if (problemDeleted) {
         delete this.problems_storage[idToDelete];
