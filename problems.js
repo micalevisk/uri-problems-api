@@ -49,7 +49,7 @@ function ProblemController(){
    */
   this.post = (req, res, next) => {
     const bparams = req.body;
-    if (!bparams || !bparams.hasOwnProperty('id') || !bparams.hasOwnProperty('input')) {
+    if (!bparams || !bparams.hasOwnProperty('id') || !bparams.hasOwnProperty('input') || !Number.isInteger(bparams.id)) {
       res.send(500, responseJson('require "id" and "input" parameters.', false));
     }
     else {
