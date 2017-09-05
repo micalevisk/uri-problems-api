@@ -74,7 +74,7 @@ function ProblemController(){
       const problemDeleted = this.problems_storage[idToDelete];
       if (problemDeleted) {
         delete this.problems_storage[idToDelete];
-        res.send(200, responseJson('problem ' + idToDelete + ' deleted', true, problemDeleted));
+        res.send(200, responseJson('problem ' + idToDelete + ' deleted', true, { problem: problemDeleted }));
       }
       else {
         res.send(404, responseJson('problem not found!', false));
