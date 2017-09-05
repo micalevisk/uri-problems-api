@@ -6,6 +6,10 @@ function ProblemModel(id, input){
   return {id, input};
 }
 
+function getValuesFromObject(obj){ // minha versão do Object.values
+  return Object.keys(obj).reduce((acum, curr) => acum.concat(obj[curr]), []);
+}
+
 
 function ProblemController(){
   this.problems_storage = {};
@@ -23,7 +27,7 @@ function ProblemController(){
    * GET /problems
    */
   this.get = (req, res, next) => {
-    res.send(200, responseJson('list of problems', true, { problems: Object.values(this.problems_storage) }));
+    res.send(200, responseJson('list of problems', true, { problems: getValuesFromObject(this.problems_storage) }));
 
     return next();
   };
