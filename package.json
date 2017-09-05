@@ -1,0 +1,14 @@
+{
+  "name": "uri_problems_api",
+  "version": "1.0.0",
+  "description": "Comporta o numero da questao no URI e sua entrada.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Micael Levi",
+  "license": "MIT",
+  "dependencies": {
+    "restify": "^5.2.0"
+  }
+}
