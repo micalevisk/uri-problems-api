@@ -10,7 +10,7 @@ function ProblemModel(id, input){
   return {id, input};
 }
 
-function getValuesFromObject(obj){ // minha versão do Object.values
+function getValuesFromObject(obj){ // minha versão do Object.values()
   return Object.keys(obj).reduce((acum, curr) => acum.concat(obj[curr]), []);
 }
 
@@ -31,18 +31,20 @@ function ProblemController(){
    * GET /problems
    */
   this.get = (req, res, next) => {
-    res.send(200, responseJson('list of problems', true, { problems: getValuesFromObject(this.problems_storage) }));
+    res.send(200,
+      responseJson('problems list', true, { problems_id: Object.keys(this.problems_storage) })
+    );
 
     return next();
   };
-  
+
   /**
    * GET /problems/:id
    */
   this.getById = (req, res, next) => {
-    const found = findProblemById(req.params.id);
-    if (found) res.send(200, responseJson('problem exist', true, { problem: found }));
-    else res.send(404, responseJson('problem not found.', false));
+    const problem = findProblemById(req.params.id);
+    if (problem) res.send(200, responseJson('problem exists', true, { problem }));
+    else res.send(404, responseJson('problem not found', false));
 
     return next();
   };
@@ -54,7 +56,7 @@ function ProblemController(){
   this.post = (req, res, next) => {
     const bparams = req.body;
     if (!bparams || !bparams.hasOwnProperty('id') || !bparams.hasOwnProperty('input') || !isNumber(bparams.id)) {
-      res.send(500, responseJson('require "id" and "input" parameters.', false));
+      res.send(500, responseJson('require parameters "id" (numer) and "input" (string)', false));
     }
     else {
       const newProblem = new ProblemModel(bparams.id, bparams.input);
@@ -77,7 +79,7 @@ function ProblemController(){
         res.send(200, responseJson('problem ' + idToDelete + ' deleted', true, { problem: problemDeleted }));
       }
       else {
-        res.send(404, responseJson('problem not found!', false));
+        res.send(404, responseJson('problem not found', false));
       }
     }
     else {
