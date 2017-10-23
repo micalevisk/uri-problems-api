@@ -9,5 +9,5 @@
 
 <div align="right">
 demo:
-<a href="https://uri-problems-api.herokuapp.com/api">https://uri-problems-api.herokuapp.com/api</a>
+<a href="https://uri-problems-api.herokuapp.com/api/problems">https://uri-problems-api.herokuapp.com/api/problems</a>
 </div>
